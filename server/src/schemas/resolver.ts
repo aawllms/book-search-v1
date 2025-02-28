@@ -2,6 +2,7 @@
 
 import User from "../models/User.js";
 import { signToken } from "../services/auth.js";
+import { AuthenticationError } from "../services/auth.js";
 
 const resolvers = {
   Query: {
@@ -11,7 +12,7 @@ const resolvers = {
       });
 
       if (!foundUser) {
-        return null;
+        throw new AuthenticationError("Authentication Error");
       }
 
       return foundUser;
